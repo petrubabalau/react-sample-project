@@ -12,10 +12,11 @@ class App extends Component {
 
   addUser = () => {
     console.log('addUser:', this.state.username)
-    this.props.dispatch({type: 'ADD_USER', payload: this.state.username})
+    this.props.addUser(this.state.username)
   }
 
   render() {
+    console.log('usersWithFoo:', this.props.usersWithFoo)
     return (
       <div>
         <input type="text" value={this.state.username} onChange={this.handleUser} />
@@ -30,11 +31,27 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log("mapStateToProps:", state)
+const mapStateToProps = (state, ownProps) => {
+  console.log("mapStateToProps:", state);
+  const usersWithFoo = state.filter((user) => user.includes(ownProps.searchText));
   return {
     users: state,
-  }
+    usersWithFoo,
+  };
+};
+
+const addUser = (username) => {
+  return { type: 'ADD_USER', payload: username };
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = {
+  addUser,
+}
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     addUser: (username) => dispatch({type: 'ADD_USER', payload: username})
+//   }
+// };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
