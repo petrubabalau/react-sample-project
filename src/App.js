@@ -1,10 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import {Component} from 'react'
+import {connect} from 'react-redux'
 
-function App() {
-  return (
-    <div className="App">Hello World</div>
-  );
+class App extends Component {
+  state = {
+    username: '',
+  }
+
+  handleUser = (e) => {
+    this.setState({username: e.target.value})
+  };
+
+  addUser = () => {
+    console.log('addUser:', this.state.username)
+    this.props.dispatch({type: 'ADD_USER', payload: this.state.username})
+  }
+
+  render() {
+    return (
+      <div>
+        <input type="text" value={this.state.username} onChange={this.handleUser} />
+        <button onClick={this.addUser}>Add user</button>
+        <ul>
+          {this.props.users.map((user, index) => (
+            <li key={index}>{user}</li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  console.log("mapStateToProps:", state)
+  return {
+    users: state,
+  }
+}
+
+export default connect(mapStateToProps)(App);

@@ -1,10 +1,10 @@
 # Getting Started with Create React App
 
-### `npx create-react-app react-sample-project`
-
-### `npm add redux`
-
-### `npm add react-redux`
+```bash
+npx create-react-app react-sample-project
+npm add redux
+npm add react-redux
+```
 
 ## Available Scripts
 
