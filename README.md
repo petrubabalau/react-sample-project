@@ -4,6 +4,8 @@
 npx create-react-app react-sample-project
 npm add redux
 npm add react-redux
+
+json-server --watch db.json --port=3004
 ```
 
 ## Available Scripts

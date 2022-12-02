@@ -1,5 +1,6 @@
-import {Component} from 'react'
-import {connect} from 'react-redux'
+import { Component } from 'react';
+import { connect } from 'react-redux';
+import { addUser } from './actions';
 
 class App extends Component {
   state = {
@@ -40,18 +41,8 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const addUser = (username) => {
-  return { type: 'ADD_USER', payload: username };
-}
-
 const mapDispatchToProps = {
   addUser,
 }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     addUser: (username) => dispatch({type: 'ADD_USER', payload: username})
-//   }
-// };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
